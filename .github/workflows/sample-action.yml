@@ -3,6 +3,8 @@
 
 name: sample-action
 
+description: "Sample Action Workflow"
+
 on:
   push:
     branches:
@@ -14,18 +16,20 @@ on:
 jobs:
   my_firsrt_job:
     runs-on:
-      macos-latest
+      ubuntu-latest
       # [ Reference ] GitHub-hosted runners
       # https://docs.github.com/en/actions/reference/virtual-environments-for-github-hosted-runners#supported-runners-and-hardware-resources
       # https://docs.github.com/en/actions/reference/software-installed-on-github-hosted-runners
     steps:
-      # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-      - uses: actions/checkout@v2
-      # Runs a single command using the runners shell
-      - uses: Run a one-line script
-        run: echo Hello world!
-      # Runs a set of commands using the runners shell
-      - name: Run a multi-line script
+      # [ Reference ] jobs.<job_id>.steps
+      # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#jobsjob_idsteps
+      - name: Print a greeting
+        env:
+          ARG_FIR: Hello,
+          ARG_SEC: GitHub Action
         run: |
-          echo Add other actions to build,
-          echo test, and deploy your project.
+          echo $ARG_FIR, $ARG_SEC!
+      # [ Reference ] Example using a Dokcer public registry action
+      # https://docs.github.com/en/actions/reference/workflow-syntax-for-github-actions#example-using-a-docker-public-registry-action
+      - name: Use 'Node:12' docker-image
+        uses: docker://node:12
