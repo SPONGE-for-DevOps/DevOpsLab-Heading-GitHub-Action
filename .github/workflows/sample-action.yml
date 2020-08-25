@@ -3,8 +3,6 @@
 
 name: sample-action
 
-description: "Sample Action Workflow"
-
 on:
   push:
     branches:
